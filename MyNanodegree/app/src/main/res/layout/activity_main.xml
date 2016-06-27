@@ -1,49 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="kung.mynanodegree.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:text="My Nanodegree Apps!" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_movies"
-        style="@style/CommonButton"
-        android:text="@string/movies" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:text="My Nanodegree Apps!" />
 
-    <Button
-        android:id="@+id/btn_hawk"
-        style="@style/CommonButton"
-        android:text="@string/hawk" />
+        <Button
+            android:id="@+id/btn_movies"
+            style="@style/CommonButton"
+            android:text="@string/movies" />
 
-    <Button
-        android:id="@+id/btn_bigger"
-        style="@style/CommonButton"
-        android:text="@string/bigger" />
+        <Button
+            android:id="@+id/btn_hawk"
+            style="@style/CommonButton"
+            android:text="@string/hawk" />
 
-    <Button
-        android:id="@+id/btn_material"
-        style="@style/CommonButton"
-        android:text="@string/material" />
+        <Button
+            android:id="@+id/btn_bigger"
+            style="@style/CommonButton"
+            android:text="@string/bigger" />
 
-    <Button
-        android:id="@+id/btn_ubiquitous"
-        style="@style/CommonButton"
-        android:text="@string/ubiquitous" />
+        <Button
+            android:id="@+id/btn_material"
+            style="@style/CommonButton"
+            android:text="@string/material" />
 
-    <Button
-        android:id="@+id/btn_capstone"
-        style="@style/CommonButton"
-        android:text="@string/capstone" />
-</LinearLayout>
+        <Button
+            android:id="@+id/btn_ubiquitous"
+            style="@style/CommonButton"
+            android:text="@string/ubiquitous" />
+
+        <Button
+            android:id="@+id/btn_capstone"
+            style="@style/CommonButton"
+            android:text="@string/capstone" />
+    </LinearLayout>
+</ScrollView>

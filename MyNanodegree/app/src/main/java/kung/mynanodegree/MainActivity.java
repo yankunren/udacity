@@ -43,27 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        String msg = "";
-        switch (v.getId()) {
-            case R.id.btn_movies:
-                msg = "movies";
-                break;
-            case R.id.btn_hawk:
-                msg = "hawk";
-                break;
-            case R.id.btn_bigger:
-                msg = "bigger";
-                break;
-            case R.id.btn_material:
-                msg = "material";
-                break;
-            case R.id.btn_ubiquitous:
-                msg = "ubiquitous";
-                break;
-            case R.id.btn_capstone:
-                msg = "capstone";
-                break;
-        }
-        Toast.makeText(this, getString(R.string.pop_message, msg), Toast.LENGTH_SHORT).show();
+        String msg = ((Button) v).getText().toString();
+        Toast.makeText(this, getString(R.string.pop_message, msg), Toast.LENGTH_LONG).show();
     }
 }
