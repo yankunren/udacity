@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/white"
         android:orientation="vertical">
 
         <TextView
@@ -16,6 +17,9 @@
             android:layout_height="100dp"
             android:background="@android:color/holo_blue_light"
             android:gravity="center_vertical"
+            android:maxLines="2"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
             android:textColor="@android:color/white"
             android:textSize="@dimen/dp_22" />
 
@@ -29,9 +33,10 @@
 
             <ImageView
                 android:id="@+id/iv_poster"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/poster_size_w"
+                android:layout_height="@dimen/poster_size_h"
                 android:layout_alignParentLeft="true"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:src="@drawable/ic_movie" />
 
             <TextView
@@ -40,8 +45,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_14"
                 android:layout_toRightOf="@+id/iv_poster"
-                android:text="2051"
-                android:textSize="@dimen/sp_22" />
+                android:textSize="@dimen/sp_26" />
 
             <TextView
                 android:id="@+id/tv_runtime"
@@ -50,27 +54,47 @@
                 android:layout_below="@+id/tv_mov_year"
                 android:layout_marginTop="@dimen/dp_14"
                 android:layout_toRightOf="@+id/iv_poster"
-                android:text="2051"
                 android:textSize="@dimen/sp_22" />
 
             <RatingBar
                 android:id="@+id/rb"
-                android:layout_width="140dp"
-                android:layout_height="40dp"
+                style="?android:ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_runtime"
                 android:layout_marginTop="@dimen/dp_14"
-                android:layout_toRightOf="@+id/iv_poster" />
+                android:layout_toRightOf="@+id/iv_poster"
+                android:isIndicator="true"
+                android:numStars="5"
+                android:stepSize="0.5" />
+
+            <TextView
+                android:id="@+id/tv_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/rb"
+                android:layout_marginLeft="@dimen/dp_4"
+                android:layout_toRightOf="@+id/rb" />
+
+            <Button
+                android:id="@+id/btn_play"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_below="@+id/rb"
+                android:layout_marginTop="@dimen/dp_14"
+                android:layout_toRightOf="@+id/iv_poster"
+                android:enabled="false"
+                android:text="Play" />
         </RelativeLayout>
 
         <TextView
             android:id="@+id/tv_overview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/dp_4"
-            android:text="2051"
+            android:background="@android:color/darker_gray"
+            android:minHeight="200dp"
+            android:padding="@dimen/dp_10"
             android:textSize="@dimen/sp_16" />
     </LinearLayout>
-
-
 </ScrollView>
 

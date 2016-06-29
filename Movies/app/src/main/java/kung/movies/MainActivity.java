@@ -2,6 +2,7 @@ package kung.movies;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -48,20 +49,32 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
     private final int SORT_BY_POPULAR = 1;
     private final int SORT_BY_RATED = 2;
 
+    private GridLayoutManager gridLayoutManager;
+
+    private int ORIENTATION_PORTRAIT_SPAN_COUNT = 2;
+    private int ORIENTATION_LANDSCAPE_SPAN_COUNT = 3;
+    private int spanCount = ORIENTATION_PORTRAIT_SPAN_COUNT;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (savedInstanceState != null && savedInstanceState.getStringArrayList("list") != null) {
+            list = savedInstanceState.getParcelableArrayList("list");
+        } else
+            onRefresh();
         initUI();
-        onRefresh();
     }
 
     private void initUI() {
         context = this;
+
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(this);
+        gridLayoutManager = new GridLayoutManager(this, spanCount);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        reviewonScreenChanged(getResources().getConfiguration());
         mAdapter = new BaseQuickAdapter<Movie>(this, R.layout.list_item_movie, list) {
             @Override
             protected void convert(BaseViewHolder holder, Movie movie) {
@@ -81,6 +94,33 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
                 context.startActivity(intent);
             }
         });
+    }
+
+    /**
+     * config SpanCount of GridLayoutManager
+     *
+     * @param newConfig
+     */
+    private void reviewonScreenChanged(Configuration newConfig) {
+        if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            spanCount = ORIENTATION_PORTRAIT_SPAN_COUNT;
+        } else {
+            spanCount = ORIENTATION_LANDSCAPE_SPAN_COUNT;
+        }
+        gridLayoutManager.setSpanCount(spanCount);
+        recyclerView.setLayoutManager(gridLayoutManager);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        reviewonScreenChanged(newConfig);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList("list", list);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -120,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
         RequestParams params = new RequestParams();
         params.add("api_key", Constant.api_key);
         params.add("page", page + "");
-        params.add("language", "zh");
+//        params.add("language", "zh");
         AsyncHttpClient client = new AsyncHttpClient();
         String url = (sortType == SORT_BY_RATED) ? Constant.api_rated : Constant.api_popular;
         client.get(context, url, params, new TextHttpResponseHandler() {

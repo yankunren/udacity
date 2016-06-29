@@ -1,5 +1,12 @@
 <resources>
     <string name="app_name">Movies</string>
-    <string name="action_popular">by most popular</string>
-    <string name="action_rated">by top rated</string>
+
+    <string name="title_movies">Popular Movies</string>
+    <string name="title_detail">Movie Detail</string>
+    <string name="title_player">Video Player</string>
+    <string name="action_popular">By Popular</string>
+    <string name="action_rated">By Rated</string>
+
+    <string name="runtime">"%1$s min"</string>
+    <string name="move_rated">"(%1$s)"</string>
 </resources>

@@ -1,11 +1,12 @@
 package kung.movies.model;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Created by Administrator on 2016/6/27.
  */
-public class Movie implements Serializable {
+public class Movie implements Parcelable {
 
     private long id;
     private String title;
@@ -124,4 +125,46 @@ public class Movie implements Serializable {
     public void setPopularity(double popularity) {
         this.popularity = popularity;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(this.id);
+        dest.writeString(this.title);
+        dest.writeString(this.original_title);
+        dest.writeString(this.poster_path);
+        dest.writeString(this.backdrop_path);
+        dest.writeString(this.original_language);
+        dest.writeString(this.release_date);
+        dest.writeIntArray(this.genre_ids);
+        dest.writeString(this.overview);
+        dest.writeByte(this.adult ? (byte) 1 : (byte) 0);
+        dest.writeByte(this.video ? (byte) 1 : (byte) 0);
+        dest.writeInt(this.vote_count);
+        dest.writeDouble(this.popularity);
+    }
+
+    public Movie() {
+    }
+
+    protected Movie(Parcel in) {
+        this.id = in.readLong();
+        this.title = in.readString();
+        this.original_title = in.readString();
+        this.poster_path = in.readString();
+        this.backdrop_path = in.readString();
+        this.original_language = in.readString();
+        this.release_date = in.readString();
+        this.genre_ids = in.createIntArray();
+        this.overview = in.readString();
+        this.adult = in.readByte() != 0;
+        this.video = in.readByte() != 0;
+        this.vote_count = in.readInt();
+        this.popularity = in.readDouble();
+    }
+
 }
