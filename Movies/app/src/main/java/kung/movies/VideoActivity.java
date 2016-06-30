@@ -10,8 +10,7 @@ import android.webkit.WebViewClient;
 public class VideoActivity extends AppCompatActivity {
 
     private WebView webView;
-    private String movTitle;
-    private String videoUrl;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,18 +23,13 @@ public class VideoActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
-
-        videoUrl = getIntent().getStringExtra("videoUrl");
-        movTitle = getIntent().getStringExtra("movTitle");
-
-        setTitle(movTitle);
+        id = getIntent().getStringExtra("id");
 
         webView = (WebView) findViewById(R.id.wv_video);
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                view.loadUrl(url);
-                return true;
+                return false;
             }
         });
         webView.setWebChromeClient(new WebChromeClient() {
@@ -44,12 +38,20 @@ public class VideoActivity extends AppCompatActivity {
                 super.onProgressChanged(view, newProgress);
             }
         });
-        webView.loadUrl(videoUrl);
+        webView.getSettings().setJavaScriptEnabled(true);
+        String html = getHTML(id);
+        webView.loadData(html, "text/html", "utf-8");
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+
+    public String getHTML(String id) {
+        return "<html><body><iframe class=\"youtube-player\" style=\"border: 0; width: 100%; height: 100%; padding:0px; margin:0px\" src=\"https://www.youtube.com/embed/"
+                + id
+                + "\" frameborder=\"0\" allowfullscreen></iframe></body></html>";
     }
 }

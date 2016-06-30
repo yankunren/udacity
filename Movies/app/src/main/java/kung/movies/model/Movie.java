@@ -126,6 +126,7 @@ public class Movie implements Parcelable {
         this.popularity = popularity;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -167,4 +168,15 @@ public class Movie implements Parcelable {
         this.popularity = in.readDouble();
     }
 
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel source) {
+            return new Movie(source);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
 }

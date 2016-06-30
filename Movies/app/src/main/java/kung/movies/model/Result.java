@@ -8,12 +8,20 @@ import java.util.List;
 /**
  * Created by Administrator on 2016/6/28.
  */
-public class Page implements Parcelable {
-
+public class Result implements Parcelable {
+    private int id;
     private int page;
     private int total_results;
-    private List<Movie> results;
+    private String results;
     private int total_pages;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getPage() {
         return page;
@@ -31,11 +39,11 @@ public class Page implements Parcelable {
         this.total_results = total_results;
     }
 
-    public List<Movie> getResults() {
+    public String getResults() {
         return results;
     }
 
-    public void setResults(List<Movie> results) {
+    public void setResults(String results) {
         this.results = results;
     }
 
@@ -47,6 +55,7 @@ public class Page implements Parcelable {
         this.total_pages = total_pages;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -54,31 +63,33 @@ public class Page implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(this.id);
         dest.writeInt(this.page);
         dest.writeInt(this.total_results);
-        dest.writeTypedList(this.results);
+        dest.writeString(this.results);
         dest.writeInt(this.total_pages);
     }
 
-    public Page() {
+    public Result() {
     }
 
-    protected Page(Parcel in) {
+    protected Result(Parcel in) {
+        this.id = in.readInt();
         this.page = in.readInt();
         this.total_results = in.readInt();
-        this.results = in.createTypedArrayList(Movie.CREATOR);
+        this.results = in.readString();
         this.total_pages = in.readInt();
     }
 
-    public static final Parcelable.Creator<Page> CREATOR = new Parcelable.Creator<Page>() {
+    public static final Parcelable.Creator<Result> CREATOR = new Parcelable.Creator<Result>() {
         @Override
-        public Page createFromParcel(Parcel source) {
-            return new Page(source);
+        public Result createFromParcel(Parcel source) {
+            return new Result(source);
         }
 
         @Override
-        public Page[] newArray(int size) {
-            return new Page[size];
+        public Result[] newArray(int size) {
+            return new Result[size];
         }
     };
 }
